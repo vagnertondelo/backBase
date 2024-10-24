@@ -1,8 +1,11 @@
 package com.api.app.controllers;
 
 
+import com.api.app.dtos.ProdutoDto;
 import com.api.app.models.ProdutoModel;
 import com.api.app.services.ProdutoService;
+import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +16,11 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("app")
-public class AppController {
+@RequestMapping("produto")
+public class ProdutoController {
 
     final private ProdutoService produtoService;
-    public AppController(ProdutoService produtoService) {
+    public ProdutoController(ProdutoService produtoService) {
         this.produtoService = produtoService;
     }
     @GetMapping("/minharota")
@@ -26,11 +29,13 @@ public class AppController {
     }
     @PostMapping("/salvar")
     public ResponseEntity<Object> saveProduto
-            (@RequestBody ProdutoModel produtoModel){
+            (@RequestBody @Valid ProdutoDto produtoDto){
+        var produtoModel = new ProdutoModel();
+        BeanUtils.copyProperties(produtoDto, produtoModel);
         return ResponseEntity.ok().body(
                 produtoService.save(produtoModel));
     }
-    @GetMapping("/listar")
+    @GetMapping("/lista")
     public ResponseEntity<List<ProdutoModel>> getAllProdutos(){
         return ResponseEntity.ok().body(
                 produtoService.findAll());
