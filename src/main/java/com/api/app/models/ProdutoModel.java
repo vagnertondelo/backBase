@@ -28,4 +28,8 @@ public class ProdutoModel implements Serializable {
     @Column(nullable = false)
     private Double preco;
 
+    @ManyToOne
+    @JoinColumn(name = "loja_id")
+    private LojaModel lojaModel;
+
 }

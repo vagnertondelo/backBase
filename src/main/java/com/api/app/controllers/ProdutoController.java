@@ -43,8 +43,11 @@ public class ProdutoController {
 
     @PostMapping("/editar")
     public ResponseEntity<Object> editarProduto(
-            @RequestBody ProdutoModel produtoModel)
+            @RequestBody @Valid ProdutoDto produtoDto)
     {
+        var produtoModel = new ProdutoModel();
+        BeanUtils.copyProperties(produtoDto, produtoModel);
+
         // buscar um ProdutoMOdel no serciço pelo ID recebido
         Optional<ProdutoModel> produtoModelOptional =
                 produtoService.findById(produtoModel.getId());
