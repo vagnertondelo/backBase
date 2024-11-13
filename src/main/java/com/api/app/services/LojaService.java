@@ -1,5 +1,6 @@
 package com.api.app.services;
 import com.api.app.models.LojaModel;
+import com.api.app.models.ProdutoModel;
 import com.api.app.repositories.LojaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,12 @@ public class LojaService {
 
     @Transactional
     public LojaModel save(LojaModel lojaModel) {
+        //Associar cada produto á loja
+        for (ProdutoModel produto: lojaModel.getProdutos()) {
+            //Associa o produto
+            produto.setLojaModel(lojaModel);
+        }
+
         return lojaRepository.save(lojaModel);
     }
 

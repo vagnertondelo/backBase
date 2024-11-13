@@ -1,6 +1,7 @@
 package com.api.app.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -30,6 +31,8 @@ public class ProdutoModel implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "loja_id")
+    //Indica que essa parte da relação não deve ser serealizada
+    @JsonBackReference
     private LojaModel lojaModel;
 
 }

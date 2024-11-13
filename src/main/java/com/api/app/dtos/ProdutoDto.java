@@ -21,4 +21,8 @@ public class ProdutoDto {
     @NotNull(message = "O preço é obrigatorio")
     @Positive(message = "Valor tem que ser positivo")
     private Double preco;
+
+    @NotNull(message = "O Id da loja é obrigatorio")
+    private UUID lojaId;
+
 }

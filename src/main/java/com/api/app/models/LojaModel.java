@@ -1,7 +1,9 @@
 package com.api.app.models;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 @Entity
@@ -17,7 +19,9 @@ public class LojaModel {
         private String razaoSocial;
 
         @OneToMany(mappedBy = "lojaModel", cascade = CascadeType.ALL )
-        private List<ProdutoModel> produtos;
+        // INdica que essa parte da relação deve ser Serializada
+        @JsonManagedReference
+        private List<ProdutoModel> produtos = new ArrayList<>();
 
 
 
