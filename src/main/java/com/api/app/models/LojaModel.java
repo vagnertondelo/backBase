@@ -18,6 +18,9 @@ public class LojaModel {
         @Column(nullable = false)
         private String razaoSocial;
 
+        @Column(nullable = false)
+        private String cnpj;
+
         @OneToMany(mappedBy = "lojaModel", cascade = CascadeType.ALL )
         // INdica que essa parte da relação deve ser Serializada
         @JsonManagedReference

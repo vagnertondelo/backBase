@@ -9,34 +9,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.View;
-
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
-;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("loja")
 public class LojaController {
     final private LojaService lojaService;
-    private final View error;
+
 
     public LojaController(LojaService lojaService, View error) {
         this.lojaService = lojaService;
-        this.error = error;
+
     }
 
-
-
-
     @PostMapping("/salvar")
-    public ResponseEntity<Object> saveLoja
-            (@RequestBody @Valid LojaDto lojaDto,
-             BindingResult result){
+    public ResponseEntity<Object> saveLoja(@RequestBody @Valid LojaDto lojaDto, BindingResult result){
         //Retorna çlista de erros da valudação do DTO
         if (result.hasErrors()){
             List<String> menssagensDeErro = result.getAllErrors()
@@ -46,17 +37,11 @@ public class LojaController {
 
             return ResponseEntity.badRequest().body(menssagensDeErro);
         }
-
-
-
-
-
         var lojaModel = new LojaModel();
         BeanUtils.copyProperties(lojaDto, lojaModel);
         return ResponseEntity.ok().body(
                 lojaService.save(lojaModel));
     }
-
 
 
     @GetMapping("/listar")

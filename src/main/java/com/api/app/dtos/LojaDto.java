@@ -13,6 +13,9 @@ public class LojaDto {
     @NotBlank(message = "Razão Social é obrigatória")
     private String razaoSocial;
 
+    @NotBlank(message = "CNPJ é obrigatório")
+    private String cnpj;
+
     private List<ProdutoModel> produtos;
 
 }

@@ -1,6 +1,5 @@
 package com.api.app.controllers;
 
-
 import com.api.app.dtos.ProdutoDto;
 import com.api.app.models.LojaModel;
 import com.api.app.models.ProdutoModel;
@@ -76,6 +75,14 @@ public class ProdutoController {
     public ResponseEntity<List<ProdutoModel>> getAllProdutos(){
         return ResponseEntity.ok().body(
                 produtoService.findAll());
+    }
+
+
+
+    @GetMapping("/listaprodutoloja/{id}")
+    public ResponseEntity<List<ProdutoModel>> getAllProdutosLoja( @PathVariable(value = "id") UUID id){
+        return ResponseEntity.ok().body(
+                produtoService.findProdutosByLojaId(id));
     }
 
     @PostMapping("/editar")

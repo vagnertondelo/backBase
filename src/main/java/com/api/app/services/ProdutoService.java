@@ -12,10 +12,10 @@ import java.util.UUID;
 @Service
 public class ProdutoService {
 
-        final ProdutoRepository produtoRepository;
-        public ProdutoService(ProdutoRepository produtoRepository) {
-            this.produtoRepository = produtoRepository;
-        }
+    final ProdutoRepository produtoRepository;
+    public ProdutoService(ProdutoRepository produtoRepository) {
+        this.produtoRepository = produtoRepository;
+    }
     @Transactional
     public ProdutoModel save(ProdutoModel produtoModel) {
         return produtoRepository.save(produtoModel);
@@ -32,5 +32,9 @@ public class ProdutoService {
     @Transactional
     public void delete(UUID id) {
             produtoRepository.deleteById(id);
+    }
+
+    public List<ProdutoModel> findProdutosByLojaId(UUID idLoja) {
+        return produtoRepository.findByLojaModel_Id(idLoja);
     }
 }
