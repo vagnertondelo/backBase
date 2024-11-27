@@ -121,7 +121,6 @@ public class ProdutoController {
                     "Produto não encontrado"
             );
         }
-
         // se existir vai no sercvice e chama remover
         produtoService.delete(id);
 
